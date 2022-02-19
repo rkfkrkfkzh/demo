@@ -1,0 +1,37 @@
+create table member(
+id varchar2(20) primary key,
+pwd varchar2(20) not null, 
+name varchar2(20),
+email varchar2(50)
+);
+
+create table img2(
+num number primary key, 
+path varchar2(500) not null,
+writer_id varchar2(20) references member(id) on delete cascade, 
+title varchar2(20)
+);
+
+create sequence seq_img2;
+
+create table reply_img(
+num number primary key,
+img_num number references img2(num) on delete cascade, 
+content varchar2(100), 
+writer_id  varchar2(20) references member(id) on delete cascade
+);
+
+create sequence seq_reply_img;
+
+create table down(
+num number primary key,
+path varchar2(500) not null,
+title varchar2(50),
+content varchar2(100),
+writer_id  varchar2(20) references member(id) on delete cascade, 
+up_date date,
+hit number default 0
+);
+
+create sequence seq_down;
+

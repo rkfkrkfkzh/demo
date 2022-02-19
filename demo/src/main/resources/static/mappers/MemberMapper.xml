@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.join.MemberMapper">
+	<resultMap type="com.example.demo.join.Member" id="member">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+	</resultMap>
+	
+	<insert id="addMember" parameterType="com.example.demo.join.Member">
+		insert into member values(#{id}, #{pwd}, #{name}, #{email})
+	</insert>
+	
+	<select id="getMember" resultMap="member" parameterType="String">
+		select * from member where id=#{id}
+	</select>
+	
+	<select id="getMembers" resultMap="member">
+		select * from member
+	</select>
+	<update id="editMember" parameterType="com.example.demo.join.Member">
+		update member set pwd=#{pwd}, email=#{email} where id=#{id}
+	</update>
+	<delete id="delMember" parameterType="String">
+		delete from member where id=#{id}
+	</delete>
+</mapper>
